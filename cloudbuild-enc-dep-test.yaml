@@ -1,0 +1,10 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gsutil cp gs://kms-testing/filetotest.json.enc .
+    gcloud kms decrypt --location global --keyring KMS-KEY-RING --key KMS-KEY-NAME --ciphertext-file filetotest.json.enc --plaintext-file filetotest
+    .json
